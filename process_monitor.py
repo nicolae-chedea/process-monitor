@@ -30,7 +30,7 @@ class ProcessMonitor:
         process_info = ProcessMetrics(self.process_name)
         for _ in range(0, self.monitoring_duration, self.sampling_interval):
             process_info.get_process_data()
-            self.timestamps.append(datetime.utcnow())
+            self.timestamps.append(str(datetime.utcnow()))
             self.cpu_percentages.append(process_info.cpu)
             self.memory_values.append(process_info.memory)
             self.file_handles.append(process_info.handles)
