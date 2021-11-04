@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QPushButton, QTableWidget, QTextEdit, QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem
+from PyQt6.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QPushButton, QTableWidget, QTextEdit, QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QSizePolicy, QAbstractScrollArea
 import sys
 from process_monitor import ProcessMonitor
 from datetime import datetime
@@ -39,7 +39,11 @@ class ProcessMonitorGui(QMainWindow):
         self.table.setItem(0, 1, QTableWidgetItem('Cpu Percentage'))
         self.table.setItem(0, 2, QTableWidgetItem('Private Memory'))
         self.table.setItem(0, 3, QTableWidgetItem('File Handles'))
-        main_layout.addWidget(self.table) 
+        size_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.table.setSizePolicy(size_policy)
+        self.table.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+
+        main_layout.addWidget(self.table)
         self.showMaximized()
 
     def process_data(self):  
